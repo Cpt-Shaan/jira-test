@@ -17,7 +17,12 @@ def playGame(playerName, pointsHistory):
         ans = num1 * num2
         print(f"Question {i} : {num1} * {num2} = ", end = "")
         start_time = time.time()
-        ansPlayer = int(input())
+        while True:
+            try:
+                ansPlayer = int(input())
+                break
+            except ValueError:
+                print("Please enter a valid integer answer: ", end="")
         end_time = time.time()
         if(ans == ansPlayer):
             print("Right!")
@@ -57,18 +62,30 @@ def plotTimes(pointsHistory):
     plt.show()
 
 def main():
-    
     print(" - x " * 10)
     print(" - - - - - Welcome to the MULTIPLICATION GAME !!!!! - - - - -")
     print(" - x " * 10)
 
-    numPlayers = int(input("Enter the number of players that wish to play (minimum 1): "))
+    while True:
+        try:
+            numPlayers = int(input("Enter the number of players that wish to play (minimum 1): "))
+            if numPlayers < 1:
+                print("Please enter a number greater than or equal to 1.")
+                continue
+            break
+        except ValueError:
+            print("Please enter a valid integer.")
 
     pointsHistory = dict()
 
     for player in range(1, numPlayers + 1):
         print()
-        playerName = input(f"Enter the name of the player-{player} (for leaderboard) : ")
+        while True:
+            playerName = input(f"Enter the name of the player-{player} (for leaderboard) : ")
+            if playerName.strip() == "":
+                print("Name cannot be empty. Please enter a valid name.")
+            else:
+                break
         playGame(playerName, pointsHistory)
         print()
 
