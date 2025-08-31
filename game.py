@@ -84,6 +84,8 @@ def main():
             playerName = input(f"Enter the name of the player-{player} (for leaderboard) : ")
             if playerName.strip() == "":
                 print("Name cannot be empty. Please enter a valid name.")
+            elif playerName in pointsHistory:
+                print("This name has already been taken. Please enter a unique name.")
             else:
                 break
         playGame(playerName, pointsHistory)
